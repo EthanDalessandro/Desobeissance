@@ -30,7 +30,7 @@ namespace _PROJECT_.GP.Scripts.Player
 
             Vector3 moveDirection = forward + right;
 
-            _rb.linearVelocity = moveDirection * _moveSpeed;
+            _rb.linearVelocity = new Vector3(moveDirection.x * _moveSpeed, _rb.linearVelocity.y, moveDirection.z * _moveSpeed);
         }
 
         public void OnMove(InputAction.CallbackContext context)
