@@ -271,6 +271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e3d5d5e22fcf04794727eb841d7ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInteractorManager: {fileID: 1838543756}
+  _crossHairsManager: {fileID: 1895360316}
 --- !u!1 &400700284
 GameObject:
   m_ObjectHideFlags: 0

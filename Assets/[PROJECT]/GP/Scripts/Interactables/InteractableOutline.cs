@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +29,7 @@ namespace _PROJECT_.GP.Scripts.Interactables
 
         public void Interact()
         {
-            
+
         }
 
         private void OnHoverEnter()
