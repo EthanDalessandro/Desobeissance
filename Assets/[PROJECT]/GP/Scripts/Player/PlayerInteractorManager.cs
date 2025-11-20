@@ -37,6 +37,8 @@ namespace _PROJECT_.GP.Scripts.Player
 
         private void PerformInteractionCheck()
         {
+            if (GameManager.Instance._gameState == GameState.Intimidation) return;
+            
             IInteractable detectedInteractable = null;
             Collider hitCollider = null;
 
