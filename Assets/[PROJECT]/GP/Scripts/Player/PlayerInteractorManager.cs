@@ -40,22 +40,15 @@ namespace _PROJECT_.GP.Scripts.Player
             IInteractable detectedInteractable = null;
             Collider hitCollider = null;
 
-            bool isHit = Physics.SphereCast(
-                _originOfCast.position,
-                _interactionRadius,
-                _originOfCast.forward,
-                out _hitInfo,
-                _interactionDistance,
-                _hitLayers
-            );
-
+            bool isHit = Physics.SphereCast(_originOfCast.position, _interactionRadius, _originOfCast.forward, out _hitInfo, _interactionDistance, _hitLayers);
+            
             _debugIsHit = isHit;
+            
             if (isHit) _debugHitPosition = _hitInfo.point;
-
+            
             if (isHit)
             {
                 hitCollider = _hitInfo.collider;
-
                 if (hitCollider == _lastHitCollider)
                 {
                     detectedInteractable = _currentInteractable;
@@ -71,7 +64,6 @@ namespace _PROJECT_.GP.Scripts.Player
                 UpdateInteractionState(detectedInteractable, hitCollider);
             }
         }
-
         private void UpdateInteractionState(IInteractable newInteractable, Collider newCollider)
         {
             if (_currentInteractable != null)
@@ -82,7 +74,6 @@ namespace _PROJECT_.GP.Scripts.Player
                     OnInteractOut?.Invoke();
                 }
             }
-
             if (newInteractable != null)
             {
                 if (newInteractable != _currentInteractable)
@@ -91,11 +82,9 @@ namespace _PROJECT_.GP.Scripts.Player
                     OnInteractIn?.Invoke();
                 }
             }
-
             _currentInteractable = newInteractable;
             _lastHitCollider = newCollider;
         }
-
         public void Interact(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
@@ -105,55 +94,32 @@ namespace _PROJECT_.GP.Scripts.Player
             _currentInteractable.Interact();
             OnInteract?.Invoke();
         }
-
         private void OnDrawGizmos()
-
         {
             if (_originOfCast == null) return;
-
-
-            bool isHit = Physics.SphereCast(
-                _originOfCast.position,
-                _interactionRadius,
-                _originOfCast.forward,
-                out RaycastHit gizmoHit,
-                _interactionDistance,
-                _hitLayers
-            );
-
-
+            
+            bool isHit = Physics.SphereCast(_originOfCast.position, _interactionRadius, _originOfCast.forward, out RaycastHit gizmoHit, _interactionDistance, _hitLayers);
+            
             float distanceToDraw;
 
-
             if (isHit)
-
             {
                 Gizmos.color = Color.red;
-
                 distanceToDraw = gizmoHit.distance;
             }
-
             else
-
             {
                 Gizmos.color = Color.green;
-
                 distanceToDraw = _interactionDistance;
             }
-
             Vector3 originPos = _originOfCast.position;
-
             Vector3 endPos = _originOfCast.position + (_originOfCast.forward * distanceToDraw);
 
             Gizmos.DrawWireSphere(originPos, _interactionRadius);
-
             Gizmos.DrawWireSphere(endPos, _interactionRadius);
-
             Gizmos.DrawLine(originPos, endPos);
-
-
+            
             Vector3 up = _originOfCast.up * _interactionRadius;
-
             Vector3 right = _originOfCast.right * _interactionRadius;
 
             Gizmos.DrawLine(originPos + up, endPos + up);

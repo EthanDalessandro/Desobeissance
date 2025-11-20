@@ -26,7 +26,7 @@ namespace _PROJECT_.GP.Scripts.Player
             Cursor.visible = false;
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             if (_moveInput.sqrMagnitude < 0.01f) return;
 

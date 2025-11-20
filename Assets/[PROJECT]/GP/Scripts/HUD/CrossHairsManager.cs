@@ -7,6 +7,7 @@ namespace _PROJECT_.GP.Scripts.HUD
     {
         [SerializeField] private GameObject _mainCrossHair;
         [SerializeField] private GameObject _handCrossHair;
+
         private void Awake()
         {
             ShowMainCrosshair();
@@ -17,7 +18,6 @@ namespace _PROJECT_.GP.Scripts.HUD
             GameManager.Instance._playerInteractorManager.OnInteractIn += ShowHandCrosshair;
             GameManager.Instance._playerInteractorManager.OnInteractOut += ShowMainCrosshair;
         }
-
         private void OnDisable()
         {
             GameManager.Instance._playerInteractorManager.OnInteractIn -= ShowHandCrosshair;
@@ -30,7 +30,7 @@ namespace _PROJECT_.GP.Scripts.HUD
             HideAll();
             _handCrossHair.SetActive(true);
         }
-        
+
         private void ShowMainCrosshair()
         {
             print("ShowMainCrosshair");
