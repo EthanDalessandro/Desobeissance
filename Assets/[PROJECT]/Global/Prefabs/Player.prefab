@@ -74,6 +74,7 @@ MonoBehaviour:
   _rotateSpeedX: 7.5
   _rotateSpeedY: 7.5
   _headRotationLimit: {x: -70, y: 50}
+  _headDownOrderedLimit: 35
 --- !u!114 &3652824368582463070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +147,27 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: bb71d725-9136-4db2-a7e4-89652e151768
     m_ActionName: 'Player/OnLook[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1841414750586385139}
+        m_TargetAssemblyTypeName: _PROJECT_.GP.Scripts.Player.PlayerInteractorManager,
+          Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ac71629b-ef7d-42b1-a7f3-a2bb4911909e
+    m_ActionName: 'Player/Interact[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 637a51c4-09e3-4b81-8193-a49e3ce48918
+    m_ActionName: 'UI/ShowHideDebug[/Keyboard/f1]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -338,7 +360,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -418,7 +440,7 @@ MonoBehaviour:
   m_Version: 2
   m_TaaSettings:
     m_Quality: 3
-    m_FrameInfluence: 0.1
+    m_FrameInfluence: 0.100000024
     m_JitterScale: 1
     m_MipBias: 0
     m_VarianceClampScale: 0.9

@@ -7,41 +7,30 @@ namespace _PROJECT_.GP.Scripts.HUD
     {
         [SerializeField] private GameObject _mainCrossHair;
         [SerializeField] private GameObject _handCrossHair;
-        private void Awake()
+        [SerializeField] private GameObject _eyesCrossHair;
+        public void ShowHandCrosshair()
         {
-            ShowMainCrosshair();
-        }
-
-        private void OnEnable()
-        {
-            GameManager.Instance._playerInteractorManager.OnInteractIn += ShowHandCrosshair;
-            GameManager.Instance._playerInteractorManager.OnInteractOut += ShowMainCrosshair;
-        }
-
-        private void OnDisable()
-        {
-            GameManager.Instance._playerInteractorManager.OnInteractIn -= ShowHandCrosshair;
-            GameManager.Instance._playerInteractorManager.OnInteractOut -= ShowMainCrosshair;
-        }
-
-        private void ShowHandCrosshair()
-        {
-            print("ShowHandCrosshair");
             HideAll();
             _handCrossHair.SetActive(true);
         }
-        
-        private void ShowMainCrosshair()
+
+        public void ShowMainCrosshair()
         {
-            print("ShowMainCrosshair");
             HideAll();
             _mainCrossHair.SetActive(true);
+        }
+
+        public void ShowEyesCrossHair()
+        {
+            HideAll();
+            _eyesCrossHair.SetActive(true);
         }
 
         private void HideAll()
         {
             _mainCrossHair.SetActive(false);
             _handCrossHair.SetActive(false);
+            _eyesCrossHair.SetActive(false);
         }
     }
 }

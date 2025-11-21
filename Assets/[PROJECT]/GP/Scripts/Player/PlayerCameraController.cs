@@ -9,11 +9,13 @@ namespace _PROJECT_.GP.Scripts.Player
         private Transform _body;
         [SerializeField] private Transform _head;
 
-        [Header("Mouse Settings")] [SerializeField, Range(1, 10)]
+        [Header("Mouse Settings")]
+        [SerializeField, Range(1, 10)]
         private float _rotateSpeedX;
 
         [SerializeField, Range(1, 10)] private float _rotateSpeedY;
         [SerializeField] private Vector2 _headRotationLimit;
+        [SerializeField] private float _headDownOrderedLimit;
         private Vector2 _moveInput;
 
         private float _xRotation = 0f;
@@ -26,8 +28,11 @@ namespace _PROJECT_.GP.Scripts.Player
             Cursor.visible = false;
         }
 
-        private void Update()
+        bool _isIntimidationTriggered = false;
+
+        private void LateUpdate()
         {
+            HeadDownCheck();
             if (_moveInput.sqrMagnitude < 0.01f) return;
 
             float mouseX = _moveInput.x * _rotateSpeedX / 100;
@@ -45,6 +50,28 @@ namespace _PROJECT_.GP.Scripts.Player
         public void OnMouseMove(InputAction.CallbackContext context)
         {
             _moveInput = context.ReadValue<Vector2>();
+        }
+
+        private void HeadDownCheck()
+        {
+            if (GameManager.Instance._gameState != GameState.Intimidation) return;
+
+            // If rotation is LESS than limit (looking up/forward) -> Trigger Effect
+            if (_xRotation < _headDownOrderedLimit)
+            {
+                if (_isIntimidationTriggered) return;
+
+                _isIntimidationTriggered = true;
+            }
+            // If rotation is GREATER OR EQUAL (looking down) -> Stop Effect
+            else
+            {
+                if (!_isIntimidationTriggered) return;
+
+                _isIntimidationTriggered = false;
+            }
+
+            GameManager.Instance.OnIntimidationTriggered?.Invoke(_isIntimidationTriggered);
         }
     }
 }
