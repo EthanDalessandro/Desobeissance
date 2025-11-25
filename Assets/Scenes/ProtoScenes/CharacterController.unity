@@ -273,7 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerInteractorManager: {fileID: 1838543756}
   _hudManager: {fileID: 1895360317}
-  _gameState: 1
+  _gameState: 0
 --- !u!1 &343033297
 GameObject:
   m_ObjectHideFlags: 0
@@ -3171,9 +3171,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1014475207050757562, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
+      propertyPath: _headDownOrderedLimit
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1820158109014700888, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401434272006582352, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7401434272006582352, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3214,6 +3222,10 @@ PrefabInstance:
     - target: {fileID: 7401434272006582352, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508159027005160284, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
+      propertyPath: field of view
+      value: 66.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
