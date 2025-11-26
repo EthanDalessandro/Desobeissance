@@ -6,13 +6,20 @@ namespace _PROJECT_.GP.Scripts.Interactables
 {
     /// <summary>
     /// Highlights an object with an outline material when interacted with.
+    /// Implements IInteractable to support Simple, Hold, and Spam interactions.
     /// </summary>
     public class InteractableOutline : MonoBehaviour, IInteractable
     {
-        [Header("Outline Settings")] private Material _basicMaterial;
+        [Header("Outline Settings")] 
         [SerializeField] private Material _outlineMaterial;
+        private Material _basicMaterial;
 
         private MeshRenderer _renderer;
+
+        // Implement IInteractable properties with default values (hidden from Inspector)
+        public InteractionType InteractionType => InteractionType.Simple;
+        public float HoldDuration => 0f;
+        public int SpamCount => 0;
 
         private void Awake()
         {
@@ -32,7 +39,8 @@ namespace _PROJECT_.GP.Scripts.Interactables
 
         public void Interact()
         {
-
+            // Optional: Default interaction behavior if needed, or leave empty
+            // Debug.Log("Outline Object Interacted: " + gameObject.name);
         }
 
         private void OnHoverEnter()

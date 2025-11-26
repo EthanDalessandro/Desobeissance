@@ -46,7 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 1820158109014700888, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
   _hudPrefab: {fileID: 4178359417585049234, guid: c3c3aedd54745f3479900d9ce678152b, type: 3}
+  _taskManagerPrefab: {fileID: 2561645817450140342, guid: 09c12ba13a353a94cacd5541f8544652, type: 3}
   _playerInteractorManager: {fileID: 0}
   _playerCameraController: {fileID: 0}
   _hudManager: {fileID: 0}
+  _taskManager: {fileID: 0}
   _gameState: 0

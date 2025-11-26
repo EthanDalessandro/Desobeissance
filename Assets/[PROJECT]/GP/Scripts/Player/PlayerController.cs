@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 namespace _PROJECT_.GP.Scripts.Player
 {
     /// <summary>
-    /// Handles basic player movement physics.
+    /// Handles player movement physics using Rigidbody and the new Input System.
+    /// Manages movement speed and ground friction.
     /// </summary>
     public class PlayerController : MonoBehaviour
     {

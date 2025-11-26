@@ -53,13 +53,11 @@ namespace _PROJECT_.GP.Scripts.Player
                 _body.Rotate(Vector3.up * mouseX);
             }
 
-            // Consume the input to prevent drift/sliding
             _moveInput = Vector2.zero;
         }
 
         public void OnMouseMove(InputAction.CallbackContext context)
         {
-            // Accumulate input to catch all events within a frame
             _moveInput += context.ReadValue<Vector2>();
         }
 
