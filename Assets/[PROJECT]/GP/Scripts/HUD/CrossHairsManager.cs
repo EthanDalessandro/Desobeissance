@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace _PROJECT_.GP.Scripts.HUD
 {
+    /// <summary>
+    /// Controls the visibility and state of different crosshair types (Main, Hand, Eyes).
+    /// </summary>
     public class CrossHairsManager : MonoBehaviour
     {
         [SerializeField] private GameObject _mainCrossHair;
