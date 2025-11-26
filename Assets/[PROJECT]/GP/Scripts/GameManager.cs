@@ -21,6 +21,10 @@ namespace _PROJECT_.GP.Scripts
     {
         public static GameManager Instance;
 
+        [Header("Prefabs")]
+        [SerializeField] private GameObject _playerPrefab;
+        [SerializeField] private GameObject _hudPrefab;
+
         [Header("References")]
         public PlayerInteractorManager _playerInteractorManager;
         public PlayerCameraController _playerCameraController;
@@ -32,7 +36,7 @@ namespace _PROJECT_.GP.Scripts
         public GameState _gameState;
 
         //Event Scene
-        public event Action OnSceneReset;
+        public event Action OnSceneSwitch;
 
         //Event Player
         public Action<bool> OnIntimidationTriggered;
@@ -42,7 +46,27 @@ namespace _PROJECT_.GP.Scripts
         private void Awake()
         {
             Instance = this;
+        
             InitializeEvents();
+
+            if (!_playerPrefab || !_hudPrefab)
+            {
+                Debug.LogError("Player or HUD prefab is not assigned.");
+                return;
+            }
+            if(!_playerInteractorManager || !_playerCameraController)
+            {
+                Debug.LogWarning("Player Instantiated cause there was no reference in scene assigned.");
+                GameObject player = Instantiate(_playerPrefab, transform.position, Quaternion.identity);
+                _playerInteractorManager = player.GetComponent<PlayerInteractorManager>();
+                _playerCameraController = player.GetComponent<PlayerCameraController>();
+            }
+            if(!_hudManager)
+            {
+                Debug.LogWarning("HUD Instantiated cause there was no reference in scene assigned.");
+                GameObject hud = Instantiate(_hudPrefab);
+                _hudManager = hud.GetComponent<HudManager>();
+            }
 
             _hudManager.Initialize(this);
             if (_playerCameraController != null)
@@ -94,7 +118,7 @@ namespace _PROJECT_.GP.Scripts
         }
         public void ResetScene()
         {
-            OnSceneReset?.Invoke();
+            OnSceneSwitch?.Invoke();
         }
     }
 }

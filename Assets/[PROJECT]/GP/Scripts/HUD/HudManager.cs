@@ -19,6 +19,7 @@ namespace _PROJECT_.GP.Scripts.HUD
         public void Initialize(GameManager gameManager)
         {
             _gameManager = gameManager;
+            SubscribeToEvents();
         }
 
         private void OnEnable()
@@ -34,24 +35,23 @@ namespace _PROJECT_.GP.Scripts.HUD
         private void SubscribeToEvents()
         {
             if (_gameManager == null) return;
-
+            //CrossHair
             _gameManager._playerInteractorManager.OnInteractIn += _crossHairsManager.ShowHandCrosshair;
             _gameManager._playerInteractorManager.OnInteractOut += _crossHairsManager.ShowMainCrosshair;
             _gameManager.OnIntimidationTriggered += HandleCrosshairIntimidation;
-
-            _gameManager.OnSceneReset += _screenEffectManager.DarkScreenEffect;
+            //ScreenEffect
             _gameManager.OnIntimidationTriggered += _screenEffectManager.HandleIntimidationTrigger;
         }
 
         private void UnsubscribeFromEvents()
         {
             if (_gameManager == null) return;
-
+            //CrossHair
             _gameManager._playerInteractorManager.OnInteractIn -= _crossHairsManager.ShowHandCrosshair;
             _gameManager._playerInteractorManager.OnInteractOut -= _crossHairsManager.ShowMainCrosshair;
             _gameManager.OnIntimidationTriggered -= HandleCrosshairIntimidation;
+            //ScreenEffect
 
-            _gameManager.OnSceneReset -= _screenEffectManager.DarkScreenEffect;
             _gameManager.OnIntimidationTriggered -= _screenEffectManager.HandleIntimidationTrigger;
         }
 

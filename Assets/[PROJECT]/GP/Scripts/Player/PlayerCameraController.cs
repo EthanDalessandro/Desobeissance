@@ -38,23 +38,29 @@ namespace _PROJECT_.GP.Scripts.Player
         private void LateUpdate()
         {
             HeadDownCheck();
-            if (_moveInput.sqrMagnitude < 0.01f) return;
+            
+            if (_moveInput.sqrMagnitude >= 0.01f)
+            {
+                float mouseX = _moveInput.x * _rotateSpeedX / 100;
+                float mouseY = _moveInput.y * _rotateSpeedY / 100;
 
-            float mouseX = _moveInput.x * _rotateSpeedX / 100;
-            float mouseY = _moveInput.y * _rotateSpeedY / 100;
+                _xRotation -= mouseY;
 
-            _xRotation -= mouseY;
+                _xRotation = Mathf.Clamp(_xRotation, _headRotationLimit.x, _headRotationLimit.y);
 
-            _xRotation = Mathf.Clamp(_xRotation, _headRotationLimit.x, _headRotationLimit.y);
+                _head.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
 
-            _head.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+                _body.Rotate(Vector3.up * mouseX);
+            }
 
-            _body.Rotate(Vector3.up * mouseX);
+            // Consume the input to prevent drift/sliding
+            _moveInput = Vector2.zero;
         }
 
         public void OnMouseMove(InputAction.CallbackContext context)
         {
-            _moveInput = context.ReadValue<Vector2>();
+            // Accumulate input to catch all events within a frame
+            _moveInput += context.ReadValue<Vector2>();
         }
 
         public void Initialize(GameManager gameManager)
