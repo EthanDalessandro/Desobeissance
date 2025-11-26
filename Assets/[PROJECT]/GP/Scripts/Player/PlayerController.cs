@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 
 namespace _PROJECT_.GP.Scripts.Player
 {
+    /// <summary>
+    /// Handles basic player movement physics.
+    /// </summary>
     public class PlayerController : MonoBehaviour
     {
         private Rigidbody _rb;

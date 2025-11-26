@@ -4,34 +4,55 @@ using UnityEngine.InputSystem;
 
 namespace _PROJECT_.GP.Scripts.HUD
 {
+    /// <summary>
+    /// Manages the Heads-Up Display (HUD) elements.
+    /// Coordinates crosshairs, info tips, and screen effects based on game events.
+    /// </summary>
     public class HudManager : MonoBehaviour
     {
         public CrossHairsManager _crossHairsManager;
         public InfoTip _infoTip;
         public ScreenEffectManager _screenEffectManager;
 
+        private GameManager _gameManager;
+
+        public void Initialize(GameManager gameManager)
+        {
+            _gameManager = gameManager;
+        }
+
         private void OnEnable()
         {
-            if (GameManager.Instance == null) return;
-
-            GameManager.Instance._playerInteractorManager.OnInteractIn += _crossHairsManager.ShowHandCrosshair;
-            GameManager.Instance._playerInteractorManager.OnInteractOut += _crossHairsManager.ShowMainCrosshair;
-            GameManager.Instance.OnIntimidationTriggered += HandleCrosshairIntimidation;
-
-            GameManager.Instance.OnSceneReset += _screenEffectManager.DarkScreenEffect;
-            GameManager.Instance.OnIntimidationTriggered += _screenEffectManager.HandleIntimidationTrigger;
+            SubscribeToEvents();
         }
 
         private void OnDisable()
         {
-            if (GameManager.Instance == null) return;
+            UnsubscribeFromEvents();
+        }
 
-            GameManager.Instance._playerInteractorManager.OnInteractIn -= _crossHairsManager.ShowHandCrosshair;
-            GameManager.Instance._playerInteractorManager.OnInteractOut -= _crossHairsManager.ShowMainCrosshair;
-            GameManager.Instance.OnIntimidationTriggered -= HandleCrosshairIntimidation;
+        private void SubscribeToEvents()
+        {
+            if (_gameManager == null) return;
 
-            GameManager.Instance.OnSceneReset -= _screenEffectManager.DarkScreenEffect;
-            GameManager.Instance.OnIntimidationTriggered -= _screenEffectManager.HandleIntimidationTrigger;
+            _gameManager._playerInteractorManager.OnInteractIn += _crossHairsManager.ShowHandCrosshair;
+            _gameManager._playerInteractorManager.OnInteractOut += _crossHairsManager.ShowMainCrosshair;
+            _gameManager.OnIntimidationTriggered += HandleCrosshairIntimidation;
+
+            _gameManager.OnSceneReset += _screenEffectManager.DarkScreenEffect;
+            _gameManager.OnIntimidationTriggered += _screenEffectManager.HandleIntimidationTrigger;
+        }
+
+        private void UnsubscribeFromEvents()
+        {
+            if (_gameManager == null) return;
+
+            _gameManager._playerInteractorManager.OnInteractIn -= _crossHairsManager.ShowHandCrosshair;
+            _gameManager._playerInteractorManager.OnInteractOut -= _crossHairsManager.ShowMainCrosshair;
+            _gameManager.OnIntimidationTriggered -= HandleCrosshairIntimidation;
+
+            _gameManager.OnSceneReset -= _screenEffectManager.DarkScreenEffect;
+            _gameManager.OnIntimidationTriggered -= _screenEffectManager.HandleIntimidationTrigger;
         }
 
         private void HandleCrosshairIntimidation(bool isTriggered)

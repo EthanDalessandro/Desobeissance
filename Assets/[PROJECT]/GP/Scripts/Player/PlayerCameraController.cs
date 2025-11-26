@@ -4,8 +4,13 @@ using UnityEngine.InputSystem;
 
 namespace _PROJECT_.GP.Scripts.Player
 {
+    /// <summary>
+    /// Controls camera rotation and head movement.
+    /// Detects if the player is looking down to trigger intimidation effects.
+    /// </summary>
     public class PlayerCameraController : MonoBehaviour
     {
+        private GameManager _gameManager;
         private Transform _body;
         [SerializeField] private Transform _head;
 
@@ -52,9 +57,14 @@ namespace _PROJECT_.GP.Scripts.Player
             _moveInput = context.ReadValue<Vector2>();
         }
 
+        public void Initialize(GameManager gameManager)
+        {
+            _gameManager = gameManager;
+        }
+
         private void HeadDownCheck()
         {
-            if (GameManager.Instance._gameState != GameState.Intimidation) return;
+            if (!_gameManager || _gameManager._gameState != GameState.Intimidation) return;
 
             // If rotation is LESS than limit (looking up/forward) -> Trigger Effect
             if (_xRotation < _headDownOrderedLimit)
@@ -71,7 +81,7 @@ namespace _PROJECT_.GP.Scripts.Player
                 _isIntimidationTriggered = false;
             }
 
-            GameManager.Instance.OnIntimidationTriggered?.Invoke(_isIntimidationTriggered);
+            _gameManager.OnIntimidationTriggered?.Invoke(_isIntimidationTriggered);
         }
     }
 }

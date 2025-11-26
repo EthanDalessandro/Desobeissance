@@ -272,8 +272,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInteractorManager: {fileID: 1838543756}
+  _playerCameraController: {fileID: 1838543764}
   _hudManager: {fileID: 1895360317}
-  _gameState: 1
+  _gameState: 0
 --- !u!1 &343033297
 GameObject:
   m_ObjectHideFlags: 0
@@ -2693,6 +2694,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 560fc26db3a14a3d9bd869752e463c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1838543764 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1014475207050757562, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
+  m_PrefabInstance: {fileID: 5536922046560364894}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a1c1ab49e7098b459f3a6d1226fe8f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1863094831
 GameObject:
   m_ObjectHideFlags: 0
@@ -3171,9 +3183,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1014475207050757562, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
+      propertyPath: _headDownOrderedLimit
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1820158109014700888, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3652824368582463070, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
+      propertyPath: _moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401434272006582352, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7401434272006582352, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
       propertyPath: m_LocalPosition.x

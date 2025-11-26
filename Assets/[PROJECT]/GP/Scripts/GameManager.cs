@@ -12,6 +12,10 @@ namespace _PROJECT_.GP.Scripts
         Intimidation,
         FreeTime
     }
+    /// <summary>
+    /// Manages the global game state and coordinates interactions between major systems.
+    /// Acts as the central hub for game logic and event distribution.
+    /// </summary>
     [DefaultExecutionOrder(-100)]
     public class GameManager : MonoBehaviour
     {
@@ -19,6 +23,7 @@ namespace _PROJECT_.GP.Scripts
 
         [Header("References")]
         public PlayerInteractorManager _playerInteractorManager;
+        public PlayerCameraController _playerCameraController;
         public HudManager _hudManager;
 
         private Dictionary<GameState, Action> _gameStateEvents;
@@ -31,13 +36,20 @@ namespace _PROJECT_.GP.Scripts
 
         //Event Player
         public Action<bool> OnIntimidationTriggered;
-        
+
         //Event Interaction
 
         private void Awake()
         {
             Instance = this;
             InitializeEvents();
+
+            _hudManager.Initialize(this);
+            if (_playerCameraController != null)
+            {
+                _playerCameraController.Initialize(this);
+            }
+
             _hudManager._crossHairsManager.ShowMainCrosshair();
         }
 

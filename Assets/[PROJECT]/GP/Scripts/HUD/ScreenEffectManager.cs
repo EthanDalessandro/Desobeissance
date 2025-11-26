@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace _PROJECT_.GP.Scripts.HUD
 {
+    /// <summary>
+    /// Handles full-screen visual effects such as fades and intimidation overlays.
+    /// </summary>
     public class ScreenEffectManager : MonoBehaviour
     {
         [Header("References")]
@@ -14,7 +17,7 @@ namespace _PROJECT_.GP.Scripts.HUD
         [Header("Settings")]
         [SerializeField] private float _darkScreenFadeDuration = 0.25f;
         [SerializeField] private float _darkScreenPauseTime = 0.25f;
-        
+
         public void HandleIntimidationTrigger(bool isTriggered)
         {
             if (isTriggered)

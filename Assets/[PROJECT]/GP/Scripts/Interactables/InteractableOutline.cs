@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace _PROJECT_.GP.Scripts.Interactables
 {
+    /// <summary>
+    /// Highlights an object with an outline material when interacted with.
+    /// </summary>
     public class InteractableOutline : MonoBehaviour, IInteractable
     {
         [Header("Outline Settings")] private Material _basicMaterial;
