@@ -127,10 +127,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2297091781973561401, guid: c3c3aedd54745f3479900d9ce678152b, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4178359417585049234, guid: c3c3aedd54745f3479900d9ce678152b, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -616,14 +612,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 628701634163474590, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
-      propertyPath: m_Antialiasing
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 628701634163474590, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1820158109014700888, guid: b79786fb05e091a4fb2e97bfe825e1a5, type: 3}
       propertyPath: m_Name
       value: Player

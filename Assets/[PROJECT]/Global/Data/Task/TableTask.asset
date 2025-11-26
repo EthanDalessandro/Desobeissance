@@ -26,7 +26,7 @@ MonoBehaviour:
     taskDescription: Poser les couverts
     objectToSpawn: {fileID: 0}
     newObjectWhenInteracted: {fileID: 0}
-    interactionType: 1
+    interactionType: 0
     holdDuration: 1
     spamCount: 5
   - taskIndex: 0

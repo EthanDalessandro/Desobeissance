@@ -8,15 +8,19 @@ namespace _PROJECT_.GP.Scripts.Task
     {
         public int _taskIndex;
         public int _taskCompleted;
-        
+
+        public GameObject _objectToSpawn;
+        public GameObject _newObjectWhenInteracted;
+
         public bool _isCompleted;
     
-        public void Initialize(InteractionType interactionType, float holdDuration, int spamCount)
+        public void Initialize(InteractionType interactionType, float holdDuration, int spamCount, GameObject objectToSpawn, GameObject newObjectWhenInteracted)
         {   
             _interactionType = interactionType;
             _holdDuration = holdDuration;
             _spamCount = spamCount;
-
+            _objectToSpawn = objectToSpawn;
+            _newObjectWhenInteracted = newObjectWhenInteracted;
             _isCompleted = false;
             _taskCompleted = 0;
         }
@@ -36,6 +40,8 @@ namespace _PROJECT_.GP.Scripts.Task
             _isCompleted = true;
             _taskCompleted++;
             Debug.Log("Interacted with " + gameObject.name + " " + _taskCompleted + " / " + _taskIndex);
+            _objectToSpawn.SetActive(false);
+            _newObjectWhenInteracted.SetActive(true);
         }
     }
 }

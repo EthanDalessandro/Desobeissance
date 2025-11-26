@@ -21,7 +21,7 @@ namespace _PROJECT_.GP.Scripts.Task
         private GameManager _gameManager;
         private bool _canAssignTask = true;
 
-        public event Action OnTaskAssigned;
+        public event Action<string, string> OnTaskAssigned;
         public event Action OnTaskCompleted;
 
         public void Initialize(GameManager gameManager)
@@ -60,13 +60,15 @@ namespace _PROJECT_.GP.Scripts.Task
                     taskEvent.Initialize(
                         currentStepInfo.interactionType, 
                         currentStepInfo.holdDuration, 
-                        currentStepInfo.spamCount
+                        currentStepInfo.spamCount,
+                        currentStepInfo.objectToSpawn,
+                        currentStepInfo.newObjectWhenInteracted
                     );
 
                     // Finalize assignment
                     _taskLeft--;
                     _canAssignTask = false;
-                    OnTaskAssigned?.Invoke();
+                    OnTaskAssigned?.Invoke(currentStepInfo.name, currentStepInfo.taskDescription);
                     return;
                 }
                 attempts++;
