@@ -29,27 +29,29 @@ namespace _PROJECT_.GP.Scripts.Interactables
         /// The type of interaction required (Simple, Hold, Spam).
         /// </summary>
         public InteractionType InteractionType { get; }
-        
+
         /// <summary>
         /// Duration in seconds required for Hold interactions.
         /// </summary>
         public float HoldDuration { get; }
-        
+
         /// <summary>
         /// Number of presses required for Spam interactions.
         /// </summary>
         public int SpamCount { get; }
 
+        public bool CanInteract { get; set; }
+
         /// <summary>
         /// Called when the player looks at or highlights the object.
         /// </summary>
         public void InteractIn();
-        
+
         /// <summary>
         /// Called when the player looks away or stops highlighting the object.
         /// </summary>
         public void InteractOut();
-        
+
         /// <summary>
         /// Called when the interaction is successfully completed.
         /// </summary>

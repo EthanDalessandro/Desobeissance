@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using _PROJECT_.GP.Scripts.ScriptablesObjects;
 using _PROJECT_.GP.Scripts.Interactables;
+using Random = UnityEngine.Random;
+
 
 namespace _PROJECT_.GP.Scripts.Task
-{   
+{
     [System.Serializable]
     public class TaskEntry
     {
@@ -21,12 +23,34 @@ namespace _PROJECT_.GP.Scripts.Task
         private GameManager _gameManager;
         private bool _canAssignTask = true;
 
-        public event Action<string, string> OnTaskAssigned;
-        public event Action OnTaskCompleted;
+        public event Action<string, string, string> OnTaskAssigned;
+        public event Action<string> OnTaskCompleted;
 
         public void Initialize(GameManager gameManager)
         {
             _gameManager = gameManager;
+        }
+
+        private void OnEnable()
+        {
+            TaskEvent.OnTaskCompleted += HandleTaskCompleted;
+        }
+
+        private void OnDisable()
+        {
+            TaskEvent.OnTaskCompleted -= HandleTaskCompleted;
+        }
+
+        private void HandleTaskCompleted(string taskId)
+        {
+            _canAssignTask = true;
+            OnTaskCompleted?.Invoke(taskId);
+            Debug.Log($"Task {taskId} completed. Can assign new task.");
+        }
+
+        private void Start()
+        {
+            AssignTask();
         }
 
         /// <summary>
@@ -44,8 +68,8 @@ namespace _PROJECT_.GP.Scripts.Task
 
             while (attempts < maxAttempts)
             {
-                int randomIndex = UnityEngine.Random.Range(0, _tasks.Count);
-                
+                int randomIndex = Random.Range(0, _tasks.Count);
+
                 TaskEntry entry = _tasks[randomIndex];
                 TaskEvent taskEvent = entry.taskEvent;
                 TaskList taskData = entry.taskData;
@@ -55,20 +79,22 @@ namespace _PROJECT_.GP.Scripts.Task
                 {
                     // Get current step info
                     TaskInfo currentStepInfo = taskData.tasks[taskEvent._taskCompleted];
+                    string currentStepId = "id" + Random.Range(0, 100000);
 
                     // Initialize task event
                     taskEvent.Initialize(
-                        currentStepInfo.interactionType, 
-                        currentStepInfo.holdDuration, 
+                        currentStepInfo.interactionType,
+                        currentStepInfo.holdDuration,
                         currentStepInfo.spamCount,
                         currentStepInfo.objectToSpawn,
-                        currentStepInfo.newObjectWhenInteracted
+                        currentStepInfo.newObjectWhenInteracted,
+                        currentStepId
                     );
 
                     // Finalize assignment
                     _taskLeft--;
-                    _canAssignTask = false;
-                    OnTaskAssigned?.Invoke(currentStepInfo.name, currentStepInfo.taskDescription);
+                    //_canAssignTask = false;
+                    OnTaskAssigned?.Invoke(currentStepInfo.name, currentStepInfo.taskDescription, currentStepId);
                     return;
                 }
                 attempts++;

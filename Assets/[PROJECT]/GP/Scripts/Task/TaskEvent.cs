@@ -3,25 +3,30 @@ using UnityEngine;
 using _PROJECT_.GP.Scripts.Interactables;
 
 namespace _PROJECT_.GP.Scripts.Task
-{   
+{
     public class TaskEvent : InteractableBase
     {
-        public int _taskIndex;
+        public static event Action<string> OnTaskCompleted;
+
         public int _taskCompleted;
 
         public GameObject _objectToSpawn;
         public GameObject _newObjectWhenInteracted;
 
         public bool _isCompleted;
-    
-        public void Initialize(InteractionType interactionType, float holdDuration, int spamCount, GameObject objectToSpawn, GameObject newObjectWhenInteracted)
-        {   
+        private string _currentIdTask;
+        public string CurrentIdTask => _currentIdTask;
+
+        public void Initialize(InteractionType interactionType, float holdDuration, int spamCount, GameObject objectToSpawn, GameObject newObjectWhenInteracted, string currentIdTask)
+        {
             _interactionType = interactionType;
             _holdDuration = holdDuration;
             _spamCount = spamCount;
             _objectToSpawn = objectToSpawn;
             _newObjectWhenInteracted = newObjectWhenInteracted;
+            _currentIdTask = currentIdTask;
             _isCompleted = false;
+            CanInteract = true;
             _taskCompleted = 0;
         }
 
@@ -37,11 +42,23 @@ namespace _PROJECT_.GP.Scripts.Task
 
         public override void Interact()
         {
+            if (_isCompleted) return;
             _isCompleted = true;
             _taskCompleted++;
-            Debug.Log("Interacted with " + gameObject.name + " " + _taskCompleted + " / " + _taskIndex);
-            _objectToSpawn.SetActive(false);
-            _newObjectWhenInteracted.SetActive(true);
+            CanInteract = false;
+            Debug.Log("Interacted with " + gameObject.name + " " + _taskCompleted);
+
+            if (_objectToSpawn != null)
+            {
+                _objectToSpawn.SetActive(false);
+            }
+            if (_newObjectWhenInteracted != null)
+            {
+                _newObjectWhenInteracted.SetActive(true);
+            }
+
+            OnTaskCompleted?.Invoke(_currentIdTask);
+            InteractOut();
         }
     }
 }

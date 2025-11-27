@@ -11,7 +11,7 @@ namespace _PROJECT_.GP.Scripts.HUD
     public class HudManager : MonoBehaviour
     {
         public CrossHairsManager _crossHairsManager;
-        public InfoTip _infoTip;
+        public InfoManager _infoManager;
         public ScreenEffectManager _screenEffectManager;
 
         private GameManager _gameManager;
@@ -69,7 +69,7 @@ namespace _PROJECT_.GP.Scripts.HUD
 
         public void ShowHideInfo(InputAction.CallbackContext context)
         {
-            _infoTip.SwitchInfoState();
+            _infoManager.SwitchInfoDebugState();
         }
     }
 }

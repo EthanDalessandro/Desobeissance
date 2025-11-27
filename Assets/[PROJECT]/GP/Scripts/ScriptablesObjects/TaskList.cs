@@ -7,7 +7,6 @@ namespace _PROJECT_.GP.Scripts.ScriptablesObjects
     [System.Serializable]
     public class TaskInfo
     {
-        public int taskIndex;
         public string name;
         public string taskDescription;
         public GameObject objectToSpawn;

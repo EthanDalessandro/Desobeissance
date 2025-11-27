@@ -1,5 +1,4 @@
 using System;
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using _PROJECT_.GP.Scripts.Interactables;
@@ -41,6 +40,15 @@ namespace _PROJECT_.GP.Scripts.Player
 
         private void Update()
         {
+            if (_currentInteractable != null && _currentInteractable.CanInteract == false)
+            {
+                // Force exit if current interactable is no longer available
+                _currentInteractable.InteractOut();
+                OnInteractOut?.Invoke();
+                _currentInteractable = null;
+                _lastHitCollider = null;
+                return;
+            }
             PerformInteractionCheck();
             HandleHoldInteraction();
         }
@@ -86,6 +94,15 @@ namespace _PROJECT_.GP.Scripts.Player
                 {
                     collider.TryGetComponent(out interactable);
                 }
+
+                // Reject interactables that cannot be interacted with
+                if (interactable != null && !interactable.CanInteract)
+                {
+                    interactable = null;
+                    collider = null;
+                    return false;
+                }
+
                 return true;
             }
 
@@ -208,7 +225,7 @@ namespace _PROJECT_.GP.Scripts.Player
             if (_originOfCast == null) return;
 
             bool isHit = Physics.SphereCast(_originOfCast.position, _interactionRadius, _originOfCast.forward, out RaycastHit gizmoHit, _interactionDistance, _hitLayers);
-            
+
             float distanceToDraw = isHit ? gizmoHit.distance : _interactionDistance;
             Gizmos.color = isHit ? Color.red : Color.green;
 

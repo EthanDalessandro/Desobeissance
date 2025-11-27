@@ -20,6 +20,7 @@ namespace _PROJECT_.GP.Scripts.Interactables
         public InteractionType InteractionType => InteractionType.Simple;
         public float HoldDuration => 0f;
         public int SpamCount => 0;
+        public bool CanInteract { get; set; }
 
         private void Awake()
         {

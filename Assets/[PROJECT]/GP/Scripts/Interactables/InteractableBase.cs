@@ -11,16 +11,17 @@ namespace _PROJECT_.GP.Scripts.Interactables
         [Header("Interaction Settings")]
         [SerializeField, Tooltip("Type of interaction required.")]
         protected InteractionType _interactionType = InteractionType.Simple;
-        
+
         [SerializeField, Tooltip("Duration in seconds for Hold interaction.")]
         protected float _holdDuration = 1f;
-        
+
         [SerializeField, Tooltip("Number of presses for Spam interaction.")]
         protected int _spamCount = 5;
-
         public InteractionType InteractionType => _interactionType;
         public float HoldDuration => _holdDuration;
         public int SpamCount => _spamCount;
+        public bool CanInteract { get; set; }
+
 
         /// <summary>
         /// Called when the player looks at or highlights the object.
